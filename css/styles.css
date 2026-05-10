@@ -777,7 +777,7 @@ cite {
 }
 
 .hero__logo {
-  height: 72px;
+  height: 160px;
   width: auto;
   filter: brightness(0) invert(1);
   display: block;
