@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kiefer Stoller | Client Intake Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0D1B2A;--navy-mid:#162436;--navy-lt:#1E3148;
+  --gold:#C9A84C;--gold-lt:#E2C97E;
+  --cream:#F8F5EE;--cream-dk:#EDE8DC;
+  --white:#FFFFFF;
+  --gray-2:#D4D0C8;--gray-5:#8A8880;--gray-7:#4A4845;
+  --green:#27AE60;--amber:#E67E22;--red:#E74C3C;
+}
+html{font-size:15px;scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--cream);color:var(--navy);min-height:100vh}
+
+/* HEADER */
+.hdr{background:var(--navy);padding:1.5rem 2rem;border-bottom:2px solid var(--gold)}
+.hdr-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.hdr-brand{display:flex;flex-direction:column;gap:3px}
+.hdr-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--white);letter-spacing:.04em}
+.hdr-sub{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.hdr-contact{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.hdr-contact a{font-size:.72rem;color:rgba(255,255,255,.55);transition:color .2s}
+.hdr-contact a:hover{color:var(--gold)}
+
+/* SERVICE SELECTOR */
+.service-selector{background:var(--navy-mid);border-bottom:1px solid var(--navy-lt);padding:0 2rem}
+.service-selector-inner{max-width:860px;margin:0 auto;display:flex;gap:0;overflow-x:auto}
+.svc-tab{padding:.85rem 1.4rem;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:.2s}
+.svc-tab:hover{color:rgba(255,255,255,.7)}
+.svc-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:2rem}
+
+/* INTRO CARD */
+.intro-card{background:var(--white);border:1px solid var(--gray-2);border-radius:6px;padding:1.5rem 2rem;margin-bottom:1.5rem;display:flex;align-items:flex-start;gap:1.25rem}
+.intro-icon{width:44px;height:44px;background:var(--navy);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.intro-icon svg{width:22px;height:22px;color:var(--gold)}
+.intro-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--navy);margin-bottom:.3rem}
+.intro-desc{font-size:.8rem;color:var(--gray-5);line-height:1.65}
+
+/* COMPLEXITY METER */
+.complexity-bar{background:var(--white);border:1px solid var(--gray-2);border-radius:6px;padding:1rem 1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.cx-label{font-size:.65rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gray-5);flex-shrink:0}
+.cx-track{flex:1;min-width:180px;height:6px;background:var(--cream-dk);border-radius:3px;overflow:hidden}
+.cx-fill{height:100%;border-radius:3px;transition:width .4s ease,background .4s ease;width:0%}
+.cx-badge{font-size:.72rem;font-weight:700;padding:.25rem .75rem;border-radius:20px;flex-shrink:0}
+.cx-low{background:rgba(39,174,96,.15);color:#1a7a40}
+.cx-mid{background:rgba(230,126,34,.15);color:#b35a0a}
+.cx-high{background:rgba(231,76,60,.15);color:#b52a1c}
+.cx-note{font-size:.7rem;color:var(--gray-5);width:100%;margin-top:.1rem}
+
+/* SECTIONS */
+.form-section{background:var(--white);border:1px solid var(--gray-2);border-radius:6px;margin-bottom:1rem;overflow:hidden}
+.sec-hdr{padding:.75rem 1.5rem;background:var(--navy);display:flex;align-items:center;gap:.75rem}
+.sec-hdr-num{font-size:.65rem;font-weight:700;letter-spacing:.1em;background:var(--gold);color:var(--navy);padding:.2rem .55rem;border-radius:2px}
+.sec-hdr-title{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.sec-body{padding:1.25rem 1.5rem;display:flex;flex-direction:column;gap:.9rem}
+
+/* FORM FIELDS */
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.field label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-7)}
+.field .sublabel{font-size:.68rem;color:var(--gray-5);margin-top:-.2rem;margin-bottom:.1rem}
+.field input[type=text],
+.field input[type=email],
+.field input[type=tel],
+.field input[type=number],
+.field select,
+.field textarea{
+  background:var(--cream);border:1px solid var(--gray-2);border-radius:4px;
+  padding:.6rem .85rem;font-family:'Manrope',sans-serif;font-size:.82rem;
+  color:var(--navy);outline:none;transition:border-color .2s;width:100%;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{resize:vertical;min-height:80px}
+.field select{cursor:pointer;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8880' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
+
+/* RADIO / CHECKBOX GROUPS */
+.opt-group{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt-btn{font-size:.72rem;font-weight:600;padding:.38rem .85rem;border:1px solid var(--gray-2);border-radius:4px;cursor:pointer;color:var(--gray-7);background:var(--cream);transition:.2s;user-select:none}
+.opt-btn:hover{border-color:var(--gold);color:var(--navy)}
+.opt-btn.selected{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.opt-btn.selected.multi{background:rgba(201,168,76,.15);border-color:var(--gold);color:var(--navy)}
+
+/* PANE */
+.pane{display:none}.pane.active{display:block}
+
+/* SUMMARY */
+.summary-box{background:var(--navy);border-radius:6px;padding:1.5rem;margin-top:1.5rem;display:none}
+.summary-box.visible{display:block}
+.sum-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(201,168,76,.25)}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem;margin-bottom:1rem}
+.sum-row{display:flex;flex-direction:column;gap:2px}
+.sum-k{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.sum-v{font-size:.8rem;color:rgba(255,255,255,.85)}
+.sum-quote{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:4px;padding:1rem;margin:.75rem 0}
+.sum-quote-lbl{font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.sum-quote-val{font-size:1.1rem;font-weight:700;color:var(--gold)}
+.sum-quote-note{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.25rem}
+.sum-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+.btn-copy{background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:.7rem 1.5rem;font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn-copy:hover{background:var(--gold-lt)}
+.btn-print{background:transparent;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.7rem 1.5rem;font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn-submit-email{background:var(--gold);color:var(--navy);border:none;border-radius:4px;padding:.7rem 1.5rem;font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.btn-submit-email:hover{background:var(--gold-lt)}
+.btn-submit-email.sent{background:var(--green);color:white}
+.btn-print:hover{color:var(--white);border-color:rgba(255,255,255,.4)}
+.btn-generate{display:inline-flex;align-items:center;gap:.5rem;background:var(--navy);color:var(--gold);border:1px solid var(--gold);border-radius:4px;padding:.75rem 1.75rem;font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s;margin-top:1rem}
+.btn-generate:hover{background:rgba(201,168,76,.1)}
+
+/* FOOTER NOTE */
+.footer-note{text-align:center;font-size:.7rem;color:var(--gray-5);margin-top:2rem;padding-top:1rem;border-top:1px solid var(--gray-2)}
+
+@media(max-width:640px){
+  .field-row{grid-template-columns:1fr}
+  .sum-grid{grid-template-columns:1fr}
+  .main{padding:1rem}
+}
+@media print{
+  .service-selector,.hdr-contact,.btn-generate,.sum-actions,.svc-tab:not(.active){display:none}
+  .pane.active{display:block}
+  body{background:white}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-brand">
+      <span class="hdr-name">Kiefer Stoller</span>
+      <span class="hdr-sub">Accounting &amp; Business Consulting &mdash; Client Intake</span>
+    </div>
+    <div class="hdr-contact">
+      <a href="index.html" style="font-size:.7rem;color:rgba(255,255,255,.4);margin-bottom:.25rem;display:block;transition:color .2s" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(255,255,255,.4)'">&#8592; Back to main site</a>
+      <a href="mailto:stollerk@gmail.com">stollerk@gmail.com</a>
+      <a href="tel:+16037997635">(603) 799-7635</a>
+      <a href="https://ks-consulting603.github.io/Consulting/" target="_blank">kieferstoller.com</a>
+    </div>
+  </div>
+</div>
+
+<div class="service-selector">
+  <div class="service-selector-inner">
+    <div class="svc-tab active" onclick="switchService('bookkeeping')">Monthly Bookkeeping</div>
+    <div class="svc-tab" onclick="switchService('cleanup')">Cleanup &amp; Catch-Up</div>
+    <div class="svc-tab" onclick="switchService('tax')">Tax Preparation</div>
+    <div class="svc-tab" onclick="switchService('analysis')">Research &amp; Analysis</div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ======== MONTHLY BOOKKEEPING ======== -->
+<div class="pane active" id="pane-bookkeeping">
+  <div class="intro-card">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/><path d="M9 12h6M9 16h4"/></svg></div>
+    <div>
+      <div class="intro-title">Monthly Bookkeeping Retainer</div>
+      <div class="intro-desc">Starting at $350/month &mdash; Pricing based on transaction volume and entity complexity. Complete this questionnaire and I'll follow up with a scoped quote within one business day.</div>
+    </div>
+  </div>
+
+  <div class="complexity-bar">
+    <span class="cx-label">Engagement Complexity</span>
+    <div class="cx-track"><div class="cx-fill" id="bk-cx-fill"></div></div>
+    <span class="cx-badge" id="bk-cx-badge">Not yet scored</span>
+    <div class="cx-note" id="bk-cx-note"></div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">01</span><span class="sec-hdr-title">Business Information</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field"><label>Business Name</label><input type="text" id="bk-bizname" placeholder="Your business name" oninput="scoreBK()"/></div>
+        <div class="field"><label>Your Name</label><input type="text" id="bk-name" placeholder="Contact name" oninput="scoreBK()"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email Address</label><input type="email" id="bk-email" placeholder="your@email.com"/></div>
+        <div class="field"><label>Phone</label><input type="tel" id="bk-phone" placeholder="(603) 000-0000"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Business Entity Type</label>
+          <select id="bk-entity" onchange="scoreBK()">
+            <option value="">Select...</option>
+            <option value="sole">Sole Proprietor / DBA</option>
+            <option value="llc1">Single-Member LLC</option>
+            <option value="llcm">Multi-Member LLC</option>
+            <option value="scorps">S-Corporation</option>
+            <option value="ccorp">C-Corporation</option>
+            <option value="partner">Partnership</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Industry / Type of Business</label>
+          <select id="bk-industry" onchange="scoreBK()">
+            <option value="">Select...</option>
+            <option value="retail">Retail</option>
+            <option value="restaurant">Restaurant / Food Service</option>
+            <option value="construction">Construction / Trades</option>
+            <option value="services">Professional Services</option>
+            <option value="health">Health / Medical</option>
+            <option value="realestate">Real Estate</option>
+            <option value="ecomm">E-Commerce</option>
+            <option value="nonprofit">Non-Profit</option>
+            <option value="tech">Technology / SaaS</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">02</span><span class="sec-hdr-title">Transaction Volume &amp; Accounts</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Estimated Monthly Transaction Count</label>
+        <div class="sublabel">Bank deposits, withdrawals, card charges, invoices, bills combined</div>
+        <div class="opt-group" id="bk-txn">
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">Under 50</span>
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">50 &ndash; 100</span>
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">100 &ndash; 200</span>
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">200 &ndash; 400</span>
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">400 &ndash; 600</span>
+          <span class="opt-btn" onclick="pick(this,'bk-txn');scoreBK()">600+</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Number of Bank Accounts</label><input type="number" id="bk-bankaccts" min="1" max="20" placeholder="e.g. 2" oninput="scoreBK()"/></div>
+        <div class="field"><label>Number of Credit / Debit Cards</label><input type="number" id="bk-cards" min="0" max="20" placeholder="e.g. 3" oninput="scoreBK()"/></div>
+      </div>
+      <div class="field">
+        <label>Do you accept payments through any of the following?</label>
+        <div class="opt-group" id="bk-payments">
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">Square</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">Stripe</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">PayPal</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">Venmo / Zelle</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">Cash</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-payments');scoreBK()">None of these</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">03</span><span class="sec-hdr-title">Current Bookkeeping Setup</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Current Accounting Software</label>
+        <div class="opt-group" id="bk-software">
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">QuickBooks Online</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">QuickBooks Desktop</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">Xero</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">Wave</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">Spreadsheets</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">Nothing / Paper</span>
+          <span class="opt-btn" onclick="pick(this,'bk-software');scoreBK()">Other</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Current State of Books</label>
+        <div class="opt-group" id="bk-state">
+          <span class="opt-btn" onclick="pick(this,'bk-state');scoreBK()">Up to date</span>
+          <span class="opt-btn" onclick="pick(this,'bk-state');scoreBK()">1&ndash;3 months behind</span>
+          <span class="opt-btn" onclick="pick(this,'bk-state');scoreBK()">3&ndash;6 months behind</span>
+          <span class="opt-btn" onclick="pick(this,'bk-state');scoreBK()">6+ months behind</span>
+          <span class="opt-btn" onclick="pick(this,'bk-state');scoreBK()">Never been done</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Are personal and business expenses currently mixed?</label>
+        <div class="opt-group" id="bk-mixed">
+          <span class="opt-btn" onclick="pick(this,'bk-mixed');scoreBK()">No &mdash; fully separated</span>
+          <span class="opt-btn" onclick="pick(this,'bk-mixed');scoreBK()">Sometimes</span>
+          <span class="opt-btn" onclick="pick(this,'bk-mixed');scoreBK()">Yes &mdash; frequently mixed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">04</span><span class="sec-hdr-title">Complexity Factors</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Which of the following apply to your business?</label>
+        <div class="opt-group" id="bk-complex">
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">Payroll</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">Sales tax filing</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">Inventory tracking</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">Multiple revenue streams</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">Job costing / project tracking</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">1099 contractors</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-complex');scoreBK()">None of these</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>What do you primarily need from monthly reports?</label>
+        <div class="opt-group" id="bk-reports">
+          <span class="opt-btn" onclick="mpick(this,'bk-reports')">Basic P&amp;L + Balance Sheet</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-reports')">Tax-ready financials</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-reports')">Cash flow visibility</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-reports')">Investor / lender reporting</span>
+          <span class="opt-btn" onclick="mpick(this,'bk-reports')">Budget vs. actuals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">05</span><span class="sec-hdr-title">Timeline &amp; Notes</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field">
+          <label>When do you need to start?</label>
+          <select id="bk-start">
+            <option value="">Select...</option>
+            <option>Immediately</option>
+            <option>Within 30 days</option>
+            <option>Next month</option>
+            <option>Next quarter</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>How did you hear about me?</label>
+          <select id="bk-source">
+            <option value="">Select...</option>
+            <option>Referral</option>
+            <option>Google search</option>
+            <option>LinkedIn</option>
+            <option>Website</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Anything else I should know before preparing your quote?</label>
+        <textarea id="bk-notes" placeholder="Specific pain points, questions, context..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generateSummary('bookkeeping')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+    Generate Scoping Summary
+  </button>
+  <div class="summary-box" id="sum-bookkeeping"></div>
+</div>
+
+
+<!-- ======== CLEANUP ======== -->
+<div class="pane" id="pane-cleanup">
+  <div class="intro-card">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+    <div>
+      <div class="intro-title">Cleanup &amp; Catch-Up Bookkeeping</div>
+      <div class="intro-desc">$60/hour &mdash; Minimum 4-hour engagement. Scoped estimate provided upfront based on backlog depth and complexity. Detailed findings summary delivered on completion.</div>
+    </div>
+  </div>
+
+  <div class="complexity-bar">
+    <span class="cx-label">Engagement Complexity</span>
+    <div class="cx-track"><div class="cx-fill" id="cu-cx-fill"></div></div>
+    <span class="cx-badge" id="cu-cx-badge">Not yet scored</span>
+    <div class="cx-note" id="cu-cx-note"></div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">01</span><span class="sec-hdr-title">Business Information</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field"><label>Business Name</label><input type="text" id="cu-bizname" placeholder="Your business name" oninput="scoreCU()"/></div>
+        <div class="field"><label>Your Name</label><input type="text" id="cu-name" placeholder="Contact name"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email Address</label><input type="email" id="cu-email" placeholder="your@email.com"/></div>
+        <div class="field"><label>Phone</label><input type="tel" id="cu-phone" placeholder="(603) 000-0000"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Entity Type</label>
+          <select id="cu-entity" onchange="scoreCU()">
+            <option value="">Select...</option>
+            <option>Sole Proprietor / DBA</option>
+            <option>Single-Member LLC</option>
+            <option>Multi-Member LLC</option>
+            <option>S-Corporation</option>
+            <option>C-Corporation</option>
+            <option>Partnership</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Industry</label>
+          <input type="text" id="cu-industry" placeholder="e.g. Construction, Restaurant..." oninput="scoreCU()"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">02</span><span class="sec-hdr-title">Backlog &amp; Scope</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field">
+          <label>How many months behind are the books?</label>
+          <input type="number" id="cu-months" min="1" max="60" placeholder="e.g. 8" oninput="scoreCU()"/>
+        </div>
+        <div class="field">
+          <label>Which tax year(s) are involved?</label>
+          <input type="text" id="cu-years" placeholder="e.g. 2023, 2024" oninput="scoreCU()"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>How would you describe the current state of the books?</label>
+        <div class="opt-group" id="cu-state">
+          <span class="opt-btn" onclick="pick(this,'cu-state');scoreCU()">Clean &mdash; just behind on data entry</span>
+          <span class="opt-btn" onclick="pick(this,'cu-state');scoreCU()">Moderate &mdash; some miscategorizations</span>
+          <span class="opt-btn" onclick="pick(this,'cu-state');scoreCU()">Messy &mdash; significant reclassification needed</span>
+          <span class="opt-btn" onclick="pick(this,'cu-state');scoreCU()">Disaster &mdash; essentially starting from scratch</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Why did the books fall behind?</label>
+        <div class="opt-group" id="cu-reason">
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">No time</span>
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">Previous bookkeeper left</span>
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">DIY got overwhelming</span>
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">Tax deadline approaching</span>
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">Loan / investor requirement</span>
+          <span class="opt-btn" onclick="pick(this,'cu-reason')">Other</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">03</span><span class="sec-hdr-title">Accounts &amp; Records</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field"><label>Number of Bank Accounts</label><input type="number" id="cu-bank" min="1" placeholder="e.g. 2" oninput="scoreCU()"/></div>
+        <div class="field"><label>Number of Credit / Debit Cards</label><input type="number" id="cu-cards" min="0" placeholder="e.g. 3" oninput="scoreCU()"/></div>
+      </div>
+      <div class="field">
+        <label>Current or previous accounting software</label>
+        <div class="opt-group" id="cu-software">
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">QuickBooks Online</span>
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">QuickBooks Desktop</span>
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">Xero</span>
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">Wave</span>
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">Spreadsheets only</span>
+          <span class="opt-btn" onclick="pick(this,'cu-software');scoreCU()">None</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Which of the following are issues?</label>
+        <div class="opt-group" id="cu-issues">
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">Personal &amp; business expenses mixed</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">Missing receipts / documentation</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">Bank feeds not connected / missing</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">No chart of accounts set up</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">Multiple payment processors unreconciled</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">Payroll not recorded</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-issues');scoreCU()">None of these</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">04</span><span class="sec-hdr-title">Purpose &amp; Timeline</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>What is driving the need for cleanup?</label>
+        <div class="opt-group" id="cu-purpose">
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">Tax filing preparation</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">Loan or SBA application</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">Investor due diligence</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">Business sale / valuation</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">Transition to ongoing bookkeeper</span>
+          <span class="opt-btn" onclick="mpick(this,'cu-purpose')">General financial visibility</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Target completion date</label>
+          <select id="cu-deadline">
+            <option value="">Select...</option>
+            <option>ASAP &mdash; urgent</option>
+            <option>Within 2 weeks</option>
+            <option>Within 30 days</option>
+            <option>Within 60 days</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Interested in ongoing bookkeeping after cleanup?</label>
+          <div class="opt-group" id="cu-ongoing" style="margin-top:.15rem">
+            <span class="opt-btn" onclick="pick(this,'cu-ongoing')">Yes</span>
+            <span class="opt-btn" onclick="pick(this,'cu-ongoing')">Maybe</span>
+            <span class="opt-btn" onclick="pick(this,'cu-ongoing')">No</span>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Additional context</label>
+        <textarea id="cu-notes" placeholder="Anything else that would help me scope this accurately..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generateSummary('cleanup')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+    Generate Scoping Summary
+  </button>
+  <div class="summary-box" id="sum-cleanup"></div>
+</div>
+
+
+<!-- ======== TAX PREP ======== -->
+<div class="pane" id="pane-tax">
+  <div class="intro-card">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/></svg></div>
+    <div>
+      <div class="intro-title">Tax Preparation</div>
+      <div class="intro-desc">Simple $79 &nbsp;|&nbsp; Individual $129 &nbsp;|&nbsp; Small Business $259 &mdash; Prior year and amended returns available. Any self-employment income is priced at the Small Business rate.</div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">01</span><span class="sec-hdr-title">Personal Information</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field"><label>Your Full Name</label><input type="text" id="tx-name" placeholder="As it appears on your SSN"/></div>
+        <div class="field"><label>Email Address</label><input type="email" id="tx-email" placeholder="your@email.com"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Phone</label><input type="tel" id="tx-phone" placeholder="(603) 000-0000"/></div>
+        <div class="field">
+          <label>Tax Year Needed</label>
+          <select id="tx-year" onchange="scoreTX()">
+            <option value="">Select...</option>
+            <option>2024 (current)</option>
+            <option>2023 (prior year)</option>
+            <option>2022 (prior year)</option>
+            <option>Amended return</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Filing Status</label>
+        <div class="opt-group" id="tx-filing">
+          <span class="opt-btn" onclick="pick(this,'tx-filing');scoreTX()">Single</span>
+          <span class="opt-btn" onclick="pick(this,'tx-filing');scoreTX()">Married Filing Jointly</span>
+          <span class="opt-btn" onclick="pick(this,'tx-filing');scoreTX()">Married Filing Separately</span>
+          <span class="opt-btn" onclick="pick(this,'tx-filing');scoreTX()">Head of Household</span>
+          <span class="opt-btn" onclick="pick(this,'tx-filing');scoreTX()">Qualifying Widow(er)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">02</span><span class="sec-hdr-title">Income Sources</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Which income types did you have this year?</label>
+        <div class="sublabel">Select all that apply</div>
+        <div class="opt-group" id="tx-income">
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">W-2 wages</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Social Security (SSA)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">1099-NEC (freelance / contractor)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">1099-MISC</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Self-employment / business income</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Rental income (Schedule E)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Investment / capital gains</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Retirement distributions (1099-R)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Unemployment (1099-G)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">Crypto / digital assets</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-income');scoreTX()">K-1 (partnership / S-corp)</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>How many W-2s do you have?</label><input type="number" id="tx-w2s" min="0" max="20" placeholder="0" oninput="scoreTX()"/></div>
+        <div class="field"><label>How many 1099s do you have?</label><input type="number" id="tx-1099s" min="0" max="50" placeholder="0" oninput="scoreTX()"/></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">03</span><span class="sec-hdr-title">Deductions &amp; Special Situations</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Which of the following apply to your return?</label>
+        <div class="opt-group" id="tx-deductions">
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Home mortgage interest</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Home office deduction</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Vehicle / mileage</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Charitable donations</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Student loan interest</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Education credits</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Child / dependent care</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Health insurance premiums (self-employed)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">Retirement contributions (IRA/SEP)</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-deductions');scoreTX()">None / standard deduction</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Any major life events this tax year?</label>
+        <div class="opt-group" id="tx-events">
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">Married or divorced</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">New dependent</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">Home purchase or sale</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">Started a business</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">Moved to a new state</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">Inheritance</span>
+          <span class="opt-btn" onclick="mpick(this,'tx-events')">None</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">04</span><span class="sec-hdr-title">Logistics</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Do you have all your documents ready?</label>
+        <div class="opt-group" id="tx-docs">
+          <span class="opt-btn" onclick="pick(this,'tx-docs')">Yes &mdash; everything gathered</span>
+          <span class="opt-btn" onclick="pick(this,'tx-docs')">Mostly &mdash; still waiting on one or two</span>
+          <span class="opt-btn" onclick="pick(this,'tx-docs')">No &mdash; need guidance on what to collect</span>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Preferred service method</label>
+          <div class="opt-group" id="tx-method" style="margin-top:.15rem">
+            <span class="opt-btn" onclick="pick(this,'tx-method')">Remote &mdash; secure upload</span>
+            <span class="opt-btn" onclick="pick(this,'tx-method')">In-person &mdash; Manchester, NH</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Target filing date</label>
+          <select id="tx-deadline">
+            <option value="">Select...</option>
+            <option>Before April 15</option>
+            <option>Extended &mdash; October 15</option>
+            <option>ASAP</option>
+            <option>No rush</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Questions or notes for me</label>
+        <textarea id="tx-notes" placeholder="Anything specific you want me to know or look at..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generateSummary('tax')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+    Generate Quote Estimate
+  </button>
+  <div class="summary-box" id="sum-tax"></div>
+</div>
+
+
+<!-- ======== RESEARCH & ANALYSIS ======== -->
+<div class="pane" id="pane-analysis">
+  <div class="intro-card">
+    <div class="intro-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+    <div>
+      <div class="intro-title">Research &amp; Analysis</div>
+      <div class="intro-desc">$60/hour &mdash; Minimum 2-hour engagement. Scoped estimate available on request. Covers financial modeling, pro forma construction, risk analysis, industry research, and scenario planning.</div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">01</span><span class="sec-hdr-title">Contact &amp; Organization</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field"><label>Your Name</label><input type="text" id="ra-name" placeholder="Contact name"/></div>
+        <div class="field"><label>Organization / Company</label><input type="text" id="ra-org" placeholder="Company name (if applicable)"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email</label><input type="email" id="ra-email" placeholder="your@email.com"/></div>
+        <div class="field"><label>Phone</label><input type="tel" id="ra-phone" placeholder="(603) 000-0000"/></div>
+      </div>
+      <div class="field">
+        <label>Industry / Sector</label>
+        <input type="text" id="ra-industry" placeholder="e.g. Clean water infrastructure, SaaS, Commercial real estate..."/>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">02</span><span class="sec-hdr-title">Project Type</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>What type of work are you looking for?</label>
+        <div class="sublabel">Select all that apply</div>
+        <div class="opt-group" id="ra-type">
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Financial modeling (pro forma)</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Capital raise preparation</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Investor materials / pitch deck support</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Industry &amp; competitive research</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Scenario &amp; sensitivity analysis</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Entity / corporate structure analysis</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Operational finance review</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Risk &amp; qualitative analysis</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-type');scoreRA()">Other / not sure yet</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Brief description of what you need</label>
+        <textarea id="ra-desc" placeholder="What problem are you trying to solve? What decision will this analysis inform?" oninput="scoreRA()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">03</span><span class="sec-hdr-title">Scope &amp; Deliverable</span></div>
+    <div class="sec-body">
+      <div class="field">
+        <label>Is there existing data or a model to work from?</label>
+        <div class="opt-group" id="ra-existing">
+          <span class="opt-btn" onclick="pick(this,'ra-existing');scoreRA()">Yes &mdash; complete existing model</span>
+          <span class="opt-btn" onclick="pick(this,'ra-existing');scoreRA()">Partial &mdash; some data / framework exists</span>
+          <span class="opt-btn" onclick="pick(this,'ra-existing');scoreRA()">No &mdash; starting from scratch</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>What format do you need the deliverable in?</label>
+        <div class="opt-group" id="ra-format">
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Excel model</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Written report (Word / PDF)</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Slide deck / presentation</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Interactive web-based model</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Memo / summary</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-format')">Flexible &mdash; open to your recommendation</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Who is the primary audience for this work?</label>
+        <div class="opt-group" id="ra-audience">
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Internal use only</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Investors / LPs</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Lenders / bank</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Board of directors</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Government / regulatory</span>
+          <span class="opt-btn" onclick="mpick(this,'ra-audience')">Business partner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="sec-hdr"><span class="sec-hdr-num">04</span><span class="sec-hdr-title">Timeline &amp; Budget</span></div>
+    <div class="sec-body">
+      <div class="field-row">
+        <div class="field">
+          <label>Project deadline or target date</label>
+          <select id="ra-deadline">
+            <option value="">Select...</option>
+            <option>Within 1 week &mdash; urgent</option>
+            <option>Within 2 weeks</option>
+            <option>Within 30 days</option>
+            <option>Within 60 days</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Estimated budget range</label>
+          <select id="ra-budget" onchange="scoreRA()">
+            <option value="">Select...</option>
+            <option value="sm">Under $500</option>
+            <option value="md">$500 &ndash; $1,500</option>
+            <option value="lg">$1,500 &ndash; $5,000</option>
+            <option value="xl">$5,000+</option>
+            <option value="open">Open &mdash; quote me</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Is this a one-time project or ongoing engagement?</label>
+        <div class="opt-group" id="ra-ongoing">
+          <span class="opt-btn" onclick="pick(this,'ra-ongoing')">One-time project</span>
+          <span class="opt-btn" onclick="pick(this,'ra-ongoing')">Ongoing / retainer</span>
+          <span class="opt-btn" onclick="pick(this,'ra-ongoing')">Not sure yet</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Anything else relevant to scoping this accurately?</label>
+        <textarea id="ra-notes" placeholder="Confidentiality requirements, stakeholder context, prior work done, links or references..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-generate" onclick="generateSummary('analysis')">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+    Generate Scoping Summary
+  </button>
+  <div class="summary-box" id="sum-analysis"></div>
+</div>
+
+<div class="footer-note">
+  Kiefer Stoller &mdash; Accounting &amp; Business Consulting &mdash; Manchester, NH<br/>
+  All information submitted is treated as confidential. Response within one business day.
+</div>
+
+</div><!-- /main -->
+
+<script>
+function switchService(svc) {
+  document.querySelectorAll('.svc-tab').forEach((t,i)=>t.classList.toggle('active',['bookkeeping','cleanup','tax','analysis'][i]===svc));
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pane-'+svc).classList.add('active');
+}
+
+// Single-select option buttons
+function pick(el, group) {
+  document.querySelectorAll('#'+group+' .opt-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// Multi-select option buttons
+function mpick(el, group) {
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) el.classList.add('multi');
+  else el.classList.remove('multi');
+}
+
+function getSelected(group) {
+  return [...document.querySelectorAll('#'+group+' .opt-btn.selected')].map(b=>b.textContent.trim());
+}
+
+function val(id) { return document.getElementById(id)?.value?.trim()||''; }
+
+// ===== BOOKKEEPING COMPLEXITY SCORE =====
+function scoreBK() {
+  let score = 0;
+  const txn = getSelected('bk-txn')[0]||'';
+  if(txn.includes('50')) score+=5;
+  else if(txn.includes('100')) score+=15;
+  else if(txn.includes('200')) score+=30;
+  else if(txn.includes('400')) score+=50;
+  else if(txn.includes('600')) score+=70;
+
+  const banks = parseInt(val('bk-bankaccts'))||1;
+  const cards = parseInt(val('bk-cards'))||0;
+  score += Math.min((banks-1)*5 + cards*4, 20);
+
+  const payments = getSelected('bk-payments');
+  score += payments.filter(p=>!p.includes('None')).length * 4;
+
+  const software = getSelected('bk-software')[0]||'';
+  if(software.includes('Nothing')||software.includes('Spreadsheet')) score += 10;
+  if(software.includes('Desktop')) score += 8;
+
+  const state = getSelected('bk-state')[0]||'';
+  if(state.includes('1\u20133')) score+=8;
+  else if(state.includes('3\u20136')) score+=18;
+  else if(state.includes('6+')) score+=28;
+  else if(state.includes('Never')) score+=35;
+
+  const mixed = getSelected('bk-mixed')[0]||'';
+  if(mixed.includes('Sometimes')) score+=8;
+  else if(mixed.includes('frequently')) score+=18;
+
+  const complex = getSelected('bk-complex');
+  score += complex.filter(c=>!c.includes('None')).length * 5;
+
+  updateMeter('bk',score,100);
+
+  // Estimate monthly hours
+  let hrs = 2;
+  if(txn.includes('50')) hrs=2;
+  else if(txn.includes('100')) hrs=4;
+  else if(txn.includes('200')) hrs=7;
+  else if(txn.includes('400')) hrs=12;
+  else if(txn.includes('600')) hrs=18;
+  hrs += (banks-1)*0.5 + cards*0.3;
+  if(mixed.includes('frequently')) hrs*=1.3;
+  if(complex.some(c=>c.includes('Inventory'))) hrs*=1.2;
+
+  const monthlyRate = Math.max(350, Math.round(hrs*60/10)*10);
+  document.getElementById('bk-cx-note').textContent = txn ? 'Estimated '+Math.round(hrs)+'\u2013'+Math.round(hrs*1.3)+' hrs/month \u2014 Suggested rate $'+monthlyRate+'/month' : '';
+}
+
+// ===== CLEANUP SCORE =====
+function scoreCU() {
+  let score = 0;
+  const months = parseInt(val('cu-months'))||0;
+  score += Math.min(months*4, 40);
+
+  const state = getSelected('cu-state')[0]||'';
+  if(state.includes('Moderate')) score+=15;
+  else if(state.includes('Messy')) score+=30;
+  else if(state.includes('Disaster')) score+=45;
+
+  const banks = parseInt(val('cu-bank'))||1;
+  const cards = parseInt(val('cu-cards'))||0;
+  score += Math.min((banks-1)*4 + cards*3, 15);
+
+  const issues = getSelected('cu-issues');
+  score += issues.filter(i=>!i.includes('None')).length * 6;
+
+  const software = getSelected('cu-software')[0]||'';
+  if(software.includes('None')||software.includes('Spreadsheet')) score+=10;
+
+  updateMeter('cu', Math.min(score,100), 100);
+
+  // Estimate hours and cost
+  if(months > 0) {
+    let hrsPerMonth = 1.5;
+    if(state.includes('Moderate')) hrsPerMonth=3.5;
+    else if(state.includes('Messy')) hrsPerMonth=5.5;
+    else if(state.includes('Disaster')) hrsPerMonth=8;
+    const issueCount = issues.filter(i=>!i.includes('None')).length;
+    hrsPerMonth *= (1 + issueCount*0.1);
+    const totalHrs = Math.round(months * hrsPerMonth);
+    const low = Math.round(totalHrs*0.85)*60;
+    const high = Math.round(totalHrs*1.15)*60;
+    document.getElementById('cu-cx-note').textContent = months+' months backlog \u2014 Est. '+totalHrs+'\u2013'+Math.round(totalHrs*1.3)+' hours \u2014 Approx. $'+low.toLocaleString()+'\u2013$'+high.toLocaleString();
+  }
+}
+
+// ===== TAX SCORE =====
+function scoreTX() {
+  let score = 0;
+  const income = getSelected('tx-income');
+  if(income.includes('Self-employment / business income')||income.includes('1099-NEC (freelance / contractor)')) score+=40;
+  if(income.includes('Rental income (Schedule E)')) score+=25;
+  if(income.includes('Investment / capital gains')) score+=15;
+  if(income.includes('Crypto / digital assets')) score+=20;
+  if(income.includes('K-1 (partnership / S-corp)')) score+=20;
+  const w2s = parseInt(val('tx-w2s'))||0;
+  score += Math.min(w2s*5,15);
+  const forms1099 = parseInt(val('tx-1099s'))||0;
+  score += Math.min(forms1099*4,20);
+  updateMeter('tx', Math.min(score,100),100);
+}
+
+// ===== R&A SCORE =====
+function scoreRA() {
+  let score = 0;
+  const types = getSelected('ra-type');
+  score += types.length * 8;
+  const existing = getSelected('ra-existing')[0]||'';
+  if(existing.includes('scratch')) score+=20;
+  else if(existing.includes('Partial')) score+=10;
+  const budget = val('ra-budget');
+  if(budget==='xl') score+=30;
+  else if(budget==='lg') score+=20;
+  else if(budget==='md') score+=10;
+  const desc = val('ra-desc').length;
+  score += Math.min(desc/10,10);
+  updateMeter('ra',Math.min(score,100),100);
+}
+
+function updateMeter(prefix, score, max) {
+  const pct = Math.min(score/max*100,100);
+  const fill = document.getElementById(prefix+'-cx-fill');
+  const badge = document.getElementById(prefix+'-cx-badge');
+  if(!fill||!badge) return;
+  fill.style.width = pct+'%';
+  if(pct<35){ fill.style.background='#27AE60'; badge.textContent='Low Complexity'; badge.className='cx-badge cx-low'; }
+  else if(pct<65){ fill.style.background='#E67E22'; badge.textContent='Moderate Complexity'; badge.className='cx-badge cx-mid'; }
+  else { fill.style.background='#E74C3C'; badge.textContent='High Complexity'; badge.className='cx-badge cx-high'; }
+}
+
+// ===== GENERATE SUMMARIES =====
+function generateSummary(type) {
+  const box = document.getElementById('sum-'+type);
+  let html = '';
+  let summaryText = '';
+
+  if(type==='bookkeeping') {
+    const biz = val('bk-bizname'); const name = val('bk-name');
+    const email = val('bk-email'); const phone = val('bk-phone');
+    const entity = val('bk-entity'); const industry = val('bk-industry');
+    const txn = getSelected('bk-txn')[0]||'Not specified';
+    const banks = val('bk-bankaccts')||'?'; const cards = val('bk-cards')||'?';
+    const software = getSelected('bk-software')[0]||'Not specified';
+    const state = getSelected('bk-state')[0]||'Not specified';
+    const mixed = getSelected('bk-mixed')[0]||'Not specified';
+    const complex = getSelected('bk-complex').join(', ')||'None noted';
+    const reports = getSelected('bk-reports').join(', ')||'Not specified';
+    const start = val('bk-start'); const notes = val('bk-notes');
+
+    let hrs=4, rate=350;
+    if(txn.includes('100')) {hrs=5;rate=400;}
+    else if(txn.includes('200')) {hrs=8;rate=550;}
+    else if(txn.includes('400')) {hrs=12;rate=750;}
+    else if(txn.includes('600')) {hrs=18;rate=1100;}
+    if(getSelected('bk-mixed')[0]?.includes('frequently')) rate=Math.round(rate*1.25);
+    rate = Math.round(rate/50)*50;
+
+    const badge = document.getElementById('bk-cx-badge')?.textContent||'';
+    summaryText = `BOOKKEEPING INTAKE SUMMARY\n${'='.repeat(40)}\nClient: ${biz||'Not provided'} | ${name}\nContact: ${email} | ${phone}\nEntity: ${entity} | Industry: ${industry}\n\nTRANSACTION VOLUME: ${txn}\nBank Accounts: ${banks} | Cards: ${cards}\nCurrent Software: ${software}\nBook State: ${state}\nPersonal/Business Mix: ${mixed}\nComplexity Factors: ${complex}\nReport Needs: ${reports}\n\nCOMPLEXITY: ${badge}\nEst. Hours/Month: ${hrs}-${Math.round(hrs*1.3)}\nSUGGESTED MONTHLY RATE: $${rate}\n\nTimeline: ${start}\nNotes: ${notes||'None'}`;
+
+    html = sumBox('Bookkeeping Retainer Scoping Summary',
+      [['Client',biz||'&mdash;'],['Contact',name],['Email',email],['Phone',phone],
+       ['Entity',entity||'&mdash;'],['Industry',industry||'&mdash;'],
+       ['Monthly Transactions',txn],['Bank Accounts',banks],['Credit Cards',cards],
+       ['Current Software',software],['Book State',state],['P/B Mixed',mixed],
+       ['Complexity Factors',complex],['Report Needs',reports],['Start Timeline',start]],
+      `$${rate} / month`,
+      `Based on ~${hrs}&ndash;${Math.round(hrs*1.3)} hours/month at current complexity level`,
+      notes, summaryText);
+  }
+
+  else if(type==='cleanup') {
+    const biz = val('cu-bizname'); const name = val('cu-name');
+    const email = val('cu-email'); const months = val('cu-months');
+    const state = getSelected('cu-state')[0]||'Not specified';
+    const banks = val('cu-bank')||'?'; const cards = val('cu-cards')||'?';
+    const software = getSelected('cu-software')[0]||'Not specified';
+    const issues = getSelected('cu-issues').join(', ')||'None noted';
+    const purpose = getSelected('cu-purpose').join(', ')||'Not specified';
+    const deadline = val('cu-deadline'); const ongoing = getSelected('cu-ongoing')[0]||'';
+    const notes = val('cu-notes');
+
+    let hrsPerMonth=1.5;
+    if(state.includes('Moderate')) hrsPerMonth=3.5;
+    else if(state.includes('Messy')) hrsPerMonth=5.5;
+    else if(state.includes('Disaster')) hrsPerMonth=8;
+    const issueCount = getSelected('cu-issues').filter(i=>!i.includes('None')).length;
+    hrsPerMonth *= (1+issueCount*0.1);
+    const totalHrs = months ? Math.round(parseInt(months)*hrsPerMonth) : 0;
+    const low = totalHrs*60; const high = Math.round(totalHrs*1.2)*60;
+
+    const badge = document.getElementById('cu-cx-badge')?.textContent||'';
+    summaryText = `CLEANUP INTAKE SUMMARY\n${'='.repeat(40)}\nClient: ${biz||'Not provided'} | ${name}\nEmail: ${email}\nMonths Behind: ${months||'?'} | State: ${state}\nAccounts: ${banks} bank, ${cards} cards\nSoftware: ${software}\nIssues: ${issues}\nPurpose: ${purpose}\nDeadline: ${deadline}\nOngoing Interest: ${ongoing}\n\nCOMPLEXITY: ${badge}\nEst. Hours: ${totalHrs}-${Math.round(totalHrs*1.2)}\nEST. PROJECT RANGE: $${low.toLocaleString()}-$${high.toLocaleString()}\n\nNotes: ${notes||'None'}`;
+
+    html = sumBox('Cleanup & Catch-Up Scoping Summary',
+      [['Client',biz||'&mdash;'],['Contact',name],['Email',email],
+       ['Months Behind',months||'Not specified'],['Book State',state],
+       ['Bank Accounts',banks],['Credit Cards',cards],['Software',software],
+       ['Issues Identified',issues],['Purpose',purpose],['Deadline',deadline],
+       ['Ongoing Interest',ongoing]],
+      totalHrs>0?`$${low.toLocaleString()} &ndash; $${high.toLocaleString()}`:'Pending scope details',
+      totalHrs>0?`Est. ${totalHrs}&ndash;${Math.round(totalHrs*1.2)} hours at $60/hr. Final quote after discovery call.`:'Please complete all fields for an estimate.',
+      notes, summaryText);
+  }
+
+  else if(type==='tax') {
+    const name = val('tx-name'); const email = val('tx-email');
+    const year = val('tx-year'); const filing = getSelected('tx-filing')[0]||'Not specified';
+    const income = getSelected('tx-income');
+    const deductions = getSelected('tx-deductions').join(', ')||'None';
+    const events = getSelected('tx-events').join(', ')||'None';
+    const docs = getSelected('tx-docs')[0]||''; const method = getSelected('tx-method')[0]||'';
+    const notes = val('tx-notes');
+
+    let tier='Simple', price=79;
+    const hasBusiness = income.some(i=>i.includes('Self-employment')||i.includes('1099-NEC')||i.includes('Schedule'));
+    const hasRental = income.some(i=>i.includes('Rental'));
+    const hasComplex = income.some(i=>i.includes('Crypto')||i.includes('K-1')||i.includes('capital gains'));
+    if(hasBusiness||hasRental) { tier='Small Business'; price=259; }
+    else if(income.length>1||parseInt(val('tx-1099s'))>0||hasComplex) { tier='Individual'; price=129; }
+    if(val('tx-year')?.includes('prior')||val('tx-year')?.includes('Amended')) price+=50;
+
+    summaryText = `TAX PREP INTAKE SUMMARY\n${'='.repeat(40)}\nClient: ${name}\nEmail: ${email}\nTax Year: ${year}\nFiling Status: ${filing}\nIncome Sources: ${income.join(', ')}\nDeductions: ${deductions}\nLife Events: ${events}\nDocuments Ready: ${docs}\nPreferred Method: ${method}\n\nSUGGESTED TIER: ${tier} - $${price}\n\nNotes: ${notes||'None'}`;
+
+    html = sumBox('Tax Preparation Quote',
+      [['Client',name||'&mdash;'],['Email',email],['Tax Year',year||'Not specified'],
+       ['Filing Status',filing],['Income Sources',income.join(', ')||'Not specified'],
+       ['Deductions',deductions],['Life Events',events],
+       ['Documents Ready',docs],['Method',method]],
+      `${tier} &mdash; $${price}`,
+      hasBusiness?'Self-employment or rental income present &mdash; Small Business rate applies. Complexity may affect final quote.':'Standard rate for this return type. Final confirmation after document review.',
+      notes, summaryText);
+  }
+
+  else if(type==='analysis') {
+    const name = val('ra-name'); const org = val('ra-org');
+    const email = val('ra-email'); const industry = val('ra-industry');
+    const types2 = getSelected('ra-type').join(', ')||'Not specified';
+    const desc = val('ra-desc');
+    const existing = getSelected('ra-existing')[0]||'Not specified';
+    const format2 = getSelected('ra-format').join(', ')||'Not specified';
+    const audience = getSelected('ra-audience').join(', ')||'Not specified';
+    const deadline = val('ra-deadline'); const budget = val('ra-budget');
+    const ongoing = getSelected('ra-ongoing')[0]||''; const notes = val('ra-notes');
+
+    const badge = document.getElementById('ra-cx-badge')?.textContent||'';
+    let estHrs = 4;
+    const typeCount = getSelected('ra-type').length;
+    estHrs = Math.max(4, typeCount*6);
+    if(existing.includes('scratch')) estHrs*=1.4;
+    const estLow = Math.round(estHrs*60);
+    const estHigh = Math.round(estHrs*1.5*60);
+
+    summaryText = `RESEARCH & ANALYSIS INTAKE SUMMARY\n${'='.repeat(40)}\nClient: ${name} | ${org}\nEmail: ${email} | Industry: ${industry}\n\nProject Type: ${types2}\nDescription: ${desc}\nExisting Data: ${existing}\nDeliverable Format: ${format2}\nAudience: ${audience}\nDeadline: ${deadline}\nBudget Range: ${budget}\nEngagement Type: ${ongoing}\n\nCOMPLEXITY: ${badge}\nEst. Range: $${estLow.toLocaleString()}-$${estHigh.toLocaleString()} (${Math.round(estHrs)}-${Math.round(estHrs*1.5)} hrs)\n\nNotes: ${notes||'None'}`;
+
+    html = sumBox('Research & Analysis Scoping Summary',
+      [['Client',name||'&mdash;'],['Organization',org||'&mdash;'],['Email',email],
+       ['Industry',industry||'&mdash;'],['Project Type',types2],
+       ['Existing Data',existing],['Deliverable',format2],
+       ['Audience',audience],['Deadline',deadline],['Budget',budget||'Not specified'],['Engagement',ongoing]],
+      `Est. $${estLow.toLocaleString()} &ndash; $${estHigh.toLocaleString()}`,
+      `Approx. ${Math.round(estHrs)}&ndash;${Math.round(estHrs*1.5)} hours at $60/hr. Scoped estimate provided after discovery call.`,
+      notes, summaryText);
+  }
+
+  box.innerHTML = html;
+  box.classList.add('visible');
+  box.scrollIntoView({behavior:'smooth',block:'start'});
+  box._summaryText = summaryText;
+}
+
+function sumBox(title, rows, quoteVal, quoteNote, notes, rawText) {
+  const grid = rows.map(r=>`<div class="sum-row"><span class="sum-k">${r[0]}</span><span class="sum-v">${r[1]||'&mdash;'}</span></div>`).join('');
+  const notesHtml = notes ? `<div class="sum-row" style="grid-column:1/-1"><span class="sum-k">Notes</span><span class="sum-v">${notes}</span></div>` : '';
+  return `<div class="sum-title">${title}</div>
+    <div class="sum-grid">${grid}${notesHtml}</div>
+    <div class="sum-quote">
+      <div class="sum-quote-lbl">Estimated Quote</div>
+      <div class="sum-quote-val">${quoteVal}</div>
+      <div class="sum-quote-note">${quoteNote}</div>
+    </div>
+    <div class="sum-actions">
+      <button class="btn-submit-email" onclick="emailSummary(this)">Submit to Kiefer</button>
+      <button class="btn-copy" onclick="copyText(this)">Copy to Clipboard</button>
+      <button class="btn-print" onclick="window.print()">Print</button>
+    </div>`;
+}
+
+function copyText(btn) {
+  const box = btn.closest('.summary-box');
+  const text = box._summaryText || box.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy Summary to Clipboard',2000);
+  });
+}
+
+function emailSummary(btn) {
+  const box = btn.closest('.summary-box');
+  const text = box._summaryText || '';
+  if (!text) { alert('Please generate the summary first.'); return; }
+  const subj = encodeURIComponent('Client Intake Submission - Kiefer Stoller Consulting');
+  const body = encodeURIComponent(text);
+  window.location.href = 'mailto:stollerk@gmail.com?subject=' + subj + '&body=' + body;
+  btn.textContent = 'Email Opened!';
+  btn.classList.add('sent');
+  setTimeout(() => { btn.textContent = 'Submit to Kiefer'; btn.classList.remove('sent'); }, 3000);
+}
+</script>
+</body>
+</html>
